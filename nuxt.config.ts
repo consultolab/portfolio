@@ -6,4 +6,5 @@ export default defineNuxtConfig({
 	eslint: {
 		// options here
 	},
+	css: ['./assets/css/main.css'],
 });
