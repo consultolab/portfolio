@@ -34,6 +34,15 @@ export default withNuxt(
 		},
 		rules: {
 			...vue.configs['vue3-recommended'].rules,
+			'vue/html-self-closing': [
+				'error',
+				{
+					html: {
+						void: 'always',
+						normal: 'never',
+					},
+				},
+			],
 		},
 	},
 
