@@ -1,3 +1,5 @@
 <template>
-	<div>Skills Page content</div>
+	<div class="page-content container">
+		<div>Skills Page content</div>
+	</div>
 </template>

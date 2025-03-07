@@ -6,7 +6,7 @@ export default defineNuxtConfig({
 	eslint: {
 		// options here
 	},
-	css: ['./assets/css/main.css'],
+	css: ['./assets/css/main.css', './assets/css/colors.css'],
 	app: {
 		pageTransition: { name: 'page', mode: 'out-in' },
 	},

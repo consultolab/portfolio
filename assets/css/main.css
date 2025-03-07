@@ -8,6 +8,53 @@
 	filter: blur(1rem);
 }
 
+body {
+	margin: 0;
+}
+
+.container {
+	max-width: 1400px;
+	margin: auto;
+}
+
+.page-content {
+	padding-top: 4rem;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
 .logo {
-	width: 150px;
+	width: 75px;
+	margin-top: 1rem;
+}
+.navbar-menu {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 0;
+	list-style: none;
+}
+.navbar-menu li {
+	margin-left: 1rem;
+}
+.navbar-menu li a {
+	color: var(--main-text-color);
+	text-decoration: none;
+}
+.navbar-menu li a:hover,
+.navbar-menu li a:focus,
+.navbar-menu li a:focus-visible {
+	color: var(--primary);
+}
+
+
+@media screen and (max-width: 1024px) {
+	.container {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
 }
