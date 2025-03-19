@@ -1,5 +1,3 @@
 <template>
-	<div class="page-content container">
-		<div>Contact Page content</div>
-	</div>
+	<div>Contact Page content</div>
 </template>
