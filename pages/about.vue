@@ -178,6 +178,41 @@
 		color: rgba(var(--white), 0.6);
 	}
 
+	@media screen and (max-width: 768px) {
+		.about-page {
+			flex-direction: column-reverse;
+		}
+		.title-shadow {
+			font-size: 4rem;
+		}
+		.info,
+		.portrait {
+			width: 100%;
+		}
+		.info {
+			padding: 6rem 1rem 2rem 1rem;
+		}
+		.portrait:before {
+			height: calc(100% + 6rem);
+			top: -2rem;
+			right: 0;
+		}
+		.portrait:after {
+			max-width: 16rem;
+			left: 22%;
+			bottom: -3rem;
+		}
+	}
+
+	@media screen and (min-width: 769px) and (max-width: 1024px) {
+		.info {
+			padding: 2rem;
+		}
+		.title-shadow {
+			min-width: 30rem;
+		}
+	}
+
 	@media screen and (max-width: 1024px) {
 		.container {
 			padding-left: 1.5rem;
