@@ -6,6 +6,7 @@
 					<img src="./assets/images/default-logo.png" alt="Logo" class="logo" />
 					<nav>
 						<ul class="navbar-menu">
+							<li><NuxtLink to="/work">Work</NuxtLink></li>
 							<li><NuxtLink to="/about">About me</NuxtLink></li>
 							<li><NuxtLink to="/skills">Skills</NuxtLink></li>
 							<li><NuxtLink to="/contact">Contact</NuxtLink></li>

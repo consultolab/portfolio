@@ -11,6 +11,7 @@
 body {
 	margin: 0;
 	font-family: "DM Sans", sans-serif;
+	width: 100%;
 }
 
 .container {
@@ -77,6 +78,15 @@ body {
 }
 .primary-button:hover {
 	background-color: rgba(var(--tertiary), 0.9);
+}
+
+@media screen and (max-width: 768px) {
+	.header {
+		flex-direction: column;
+	}
+	.logo {
+		margin-top: 1rem;
+	}
 }
 
 

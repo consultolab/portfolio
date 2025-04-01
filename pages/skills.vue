@@ -17,21 +17,34 @@
 			<div class="tab-content">
 				<transition name="fade" mode="out-in">
 					<div :key="activeIndex" class="content-box">
-						<h2>{{ data[activeIndex].title }}</h2>
-						<p
-							v-for="(infoRow, infoIndex) in data[activeIndex].content"
-							:key="infoIndex"
-						>
-							{{ infoRow }}
-						</p>
-						<div v-if="data[activeIndex].labels?.length" class="labels">
-							<span
-								v-for="(label, labelIndex) in data[activeIndex].labels"
-								:key="labelIndex"
-								class="label"
+						<div class="subtitle">Info</div>
+						<div class="title-container">
+							<div class="title-shadow">{{ data[activeIndex].title }}</div>
+							<div class="title">{{ data[activeIndex].title }}</div>
+						</div>
+						<div class="info">
+							<p
+								v-for="(infoRow, infoIndex) in data[activeIndex].content"
+								:key="infoIndex"
 							>
-								{{ label }}
-							</span>
+								{{ infoRow }}
+							</p>
+						</div>
+						<NuxtLink to="/work" class="primary-button">
+							See related work
+						</NuxtLink>
+						<div class="carousel-wrapper">
+							<div class="carousel">
+								<div class="carousel-content">
+									<span
+										v-for="(text, index) in repeatedKeywords"
+										:key="index"
+										class="carousel-item"
+									>
+										{{ text }}
+									</span>
+								</div>
+							</div>
 						</div>
 					</div>
 				</transition>
@@ -41,16 +54,35 @@
 </template>
 
 <script setup>
-	import { nextTick, onMounted } from 'vue';
+	import { computed, nextTick, onMounted } from 'vue';
 
 	const activeIndex = ref(0);
 	const activeTop = ref(0);
 	const items = ref([]);
 
+	const keywords = [
+		'web-design',
+		'responsive design',
+		'performance',
+		'scallability',
+		'UI/UX',
+		'adaptability',
+		'team work',
+	];
+
+	const repeatedKeywords = computed(() => [
+		...keywords,
+		...keywords,
+		...keywords,
+	]);
+
 	const data = [
 		{
 			title: 'Photoshop',
-			content: ['Tab 1'],
+			content: [
+				'Beyond just aesthetics, my expertise in Photoshop helps in translating design concepts into functional and intuitive interfaces.',
+				'I focus on maintaining an efficient design-to-code workflow by slicing assets, managing layers effectively, and adhering to industry best practices for web and mobile performance. This ensures that the final implementation remains true to the original design while providing an optimized experience for users.',
+			],
 			image: 'photoshop-icon.png',
 		},
 		{
@@ -59,22 +91,31 @@
 				'Proficient in writing clean, semantic HTML and modern CSS to create responsive, accessible, and visually appealing web interfaces. Experienced in CSS frameworks, animations, and design techniques to enhance user experience.',
 				'I focus on building pixel-perfect designs that adapt seamlessly across different devices and screen sizes. With a deep understanding of flexbox, grid, and modern CSS methodologies, I ensure that layouts are both functional and aesthetically pleasing.',
 			],
-			labels: ['web design', 'responsive', 'UI/UX'],
 			image: 'html-icon.png',
 		},
 		{
-			title: 'Javascript',
-			content: ['Tab 3'],
+			title: 'Typescript',
+			content: [
+				'I first started working with JavaScript (ES6), building dynamic and interactive web applications while leveraging modern features like arrow functions, destructuring, and async/await.',
+				'As projects grew in complexity, I transitioned to TypeScript to enhance maintainability and scalability. TypeScript’s static typing, advanced type inference, and interfaces have significantly improved my development workflow by catching potential errors early and making code more predictable.',
+				'With TypeScript, I focus on writing clean, reusable, and well-structured code, ensuring better collaboration within teams and smoother integration with large-scale applications.',
+			],
 			image: 'typescript-icon.png',
 		},
 		{
 			title: 'Python',
-			content: ['Tab 4'],
+			content: [
+				'With Python, I worked on the backend functionalities for both web and mobile applications, ensuring robust, scalable, and efficient server-side logic.',
+				'Using Flask framework, I’ve built RESTful APIs, handled authentication, and optimized database interactions for seamless client-server communication. Python’s versatility allowed me to create well-structured and maintainable backend services, ensuring smooth integration with frontend applications while maintaining security and performance best practices.',
+			],
 			image: 'python-icon.webp',
 		},
 		{
 			title: 'React Native',
-			content: ['Tab 5'],
+			content: [
+				'Working as part of a team, I contributed to the development of mobile applications using React Native, ensuring seamless performance across iOS and Android.',
+				'With a focus on component-based architecture and a declarative UI approach, I helped build intuitive and high-performing apps while integrating native modules and optimizing animations for a smooth, native-like experience. Collaboration played a key role in refining features, troubleshooting issues, and maintaining code quality to deliver a polished final product.',
+			],
 			image: 'react-native-icon.svg',
 		},
 	];
@@ -120,13 +161,15 @@
 		flex-direction: column;
 		justify-content: center;
 		position: relative;
+		border-right: 2px solid rgba(var(--primary), 0.1);
+		margin: 2rem 0;
 	}
 
 	.active-border {
 		position: absolute;
-		right: -1px;
+		right: -3px;
 		width: 4px;
-		height: 4rem;
+		height: 5.5rem;
 		background: rgb(var(--primary));
 		border-radius: 5px;
 		transition: top 0.3s ease-in-out;
@@ -140,16 +183,13 @@
 		flex-direction: row;
 		justify-content: flex-end;
 		align-items: center;
-		border: none;
-		background-color: transparent;
-		padding: 1rem;
+		padding: 1.5rem;
 		transition: border-color 0.5s ease;
-		border-right: 2px solid rgba(var(--primary), 0.1);
 	}
 
 	.tab img {
-		width: 2rem;
-		height: 2rem;
+		width: 2.5rem;
+		height: 2.5rem;
 		object-fit: contain;
 		filter: grayscale(1);
 	}
@@ -161,28 +201,102 @@
 
 	.tab-content {
 		padding: 2rem 1rem;
-		width: 40%;
+		width: 50%;
 		display: flex;
 		align-items: center;
 	}
 
-	.tab-content h2 {
+	.content-box {
+		width: 100%;
+	}
+
+	.info {
+		margin-bottom: 2rem;
+	}
+
+	.info p {
+		font-size: 1.1rem;
+		line-height: 1.6rem;
+	}
+
+	.subtitle {
+		font-size: 0.9rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		color: rgb(var(--tint-orange));
+		margin-bottom: 1rem;
+	}
+
+	.title-container {
+		display: flex;
+		position: relative;
+		align-items: center;
+	}
+	.title {
+		font-size: 2.5rem;
+		font-weight: 700;
+		line-height: 5rem;
+		position: relative;
+		display: block;
+		z-index: 1;
 		color: rgb(var(--primary));
+	}
+	.title-shadow {
+		font-size: 5rem;
+		font-weight: 700;
+		position: absolute;
+		z-index: 0;
+		line-height: 5rem;
+		top: 0;
+		left: 0;
+		color: rgba(var(--tint-salmon), 0.15);
+		min-width: 30rem;
+	}
+
+	.primary-button {
+		display: block;
+		width: fit-content;
+		margin-bottom: 2rem;
+	}
+
+	.carousel-wrapper {
+		overflow: hidden;
+		white-space: nowrap;
+		width: 100%;
+		background: rgb(var(--secondary));
+		padding: 0.5rem 0;
+	}
+
+	.carousel {
+		display: flex;
+		align-items: center;
+		width: 100%;
+	}
+
+	.carousel-content {
+		display: flex;
+		gap: 3rem;
+		animation: scrollText 15s linear infinite;
+		min-width: max-content; /* Ensures smooth looping */
+	}
+
+	.carousel-content:hover {
+		animation-play-state: paused;
+	}
+
+	.carousel-item {
+		color: rgb(var(--tint-salmon));
+		font-size: 0.9rem;
 		text-transform: uppercase;
 	}
 
-	.labels {
-		display: flex;
-		flex-wrap: wrap;
-	}
-
-	.label {
-		padding: 0.25rem 0.75rem;
-		font-size: 0.9rem;
-		margin-right: 0.5rem;
-		border-radius: 0.2rem;
-		background-color: rgba(var(--tertiary), 0.05);
-		color: rgb(var(--tertiary));
+	@keyframes scrollText {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-50%);
+		}
 	}
 
 	/* Swipe-Up Transition */
@@ -216,5 +330,37 @@
 	.fade-enter,
 	.fade-leave-to {
 		opacity: 0;
+	}
+
+	@media screen and (max-width: 767px) {
+		.skills-container .container {
+			gap: 0;
+			padding-left: 0;
+			padding-right: 0;
+		}
+		.tab {
+			padding: 1rem;
+		}
+		.tab-content {
+			width: calc(100% - 7rem);
+		}
+		.title {
+			font-size: 2rem;
+			line-height: 4rem;
+		}
+		.title-shadow {
+			min-width: 16rem;
+			max-width: 16rem;
+			font-size: 3rem;
+			line-height: 4rem;
+			height: 4rem;
+			overflow: hidden;
+		}
+	}
+
+	@media screen and (min-width: 2000px) {
+		.tabs-container {
+			margin: 8rem 0;
+		}
 	}
 </style>
