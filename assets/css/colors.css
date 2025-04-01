@@ -1,4 +1,11 @@
 :root {
-	--main-text-color: #000;
-	--primary: #146EF5;
+	--white: 255, 255, 255;
+	--main-text-color: 0, 0, 0;
+	--secondary-text-color: 85, 85, 85;
+	--primary: 28, 24, 64;
+	--secondary: 244, 245, 246;
+	--tertiary: 130, 30, 61;
+	--tint-grey: 227, 227, 227;
+	--tint-orange: 220, 75, 62;
+	--tint-salmon: 240, 165, 164;
 }
