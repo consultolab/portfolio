@@ -44,11 +44,26 @@
 		message: '',
 	});
 
+	const successMessage = ref('');
 	const loading = ref(false);
 
 	const submitForm = async () => {
 		loading.value = true;
-		console.log(form.value);
+		successMessage.value = '';
+
+		try {
+			const data = await $fetch('/api/contact', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: form.value,
+			});
+			console.log('data', data);
+			successMessage.value = data;
+		} catch (err) {
+			console.log(err);
+		} finally {
+			console.log('yey');
+		}
 	};
 </script>
 
