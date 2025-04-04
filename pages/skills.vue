@@ -33,11 +33,11 @@
 						<NuxtLink to="/work" class="primary-button">
 							See related work
 						</NuxtLink>
-						<div class="carousel-wrapper">
+						<div class="carousel-wrapper" :class="{ 'disable-animation': !animateKeywords }">
 							<div class="carousel">
 								<div class="carousel-content">
 									<span
-										v-for="(text, index) in repeatedKeywords"
+										v-for="(text, index) in keywords"
 										:key="index"
 										class="carousel-item"
 									>
@@ -59,6 +59,7 @@
 	const activeIndex = ref(0);
 	const activeTop = ref(0);
 	const items = ref([]);
+	const animateKeywords = true;
 
 	const keywords = [
 		'web-design',
@@ -70,11 +71,11 @@
 		'team work',
 	];
 
-	const repeatedKeywords = computed(() => [
-		...keywords,
-		...keywords,
-		...keywords,
-	]);
+	// const repeatedKeywords = computed(() => [
+	// 	...keywords,
+	// 	...keywords,
+	// 	...keywords,
+	// ]);
 
 	const data = [
 		{
@@ -145,6 +146,13 @@
 		width: 100%;
 		z-index: 0;
 		background-color: rgb(var(--secondary));
+		transition: background 0.2s ease-in-out;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		min-height: calc(100% - 5.4rem);
+		padding-top: 5.4rem; /* this is the header height */
 	}
 
 	.skills-container .container {
@@ -267,6 +275,11 @@
 		padding: 0.5rem 0;
 	}
 
+	.carousel-wrapper.disable-animation {
+		overflow: visible;
+		white-space: wrap;
+	}
+
 	.carousel {
 		display: flex;
 		align-items: center;
@@ -276,8 +289,14 @@
 	.carousel-content {
 		display: flex;
 		gap: 3rem;
-		animation: scrollText 15s linear infinite;
+		animation: scrollText 20s linear infinite;
 		min-width: max-content; /* Ensures smooth looping */
+	}
+	.carousel-wrapper.disable-animation .carousel-content {
+		animation: none;
+		min-width: 100%;
+		flex-wrap: wrap;
+		gap: 0.75rem;
 	}
 
 	.carousel-content:hover {
@@ -288,6 +307,11 @@
 		color: rgb(var(--tint-salmon));
 		font-size: 0.9rem;
 		text-transform: uppercase;
+	}
+	.carousel-wrapper.disable-animation .carousel-item {
+		background-color: rgba(var(--tint-salmon), 0.15);
+		padding: 0.25rem 0.5rem;
+		font-size: 0.8rem;
 	}
 
 	@keyframes scrollText {
@@ -337,6 +361,9 @@
 			gap: 0;
 			padding-left: 0;
 			padding-right: 0;
+		}
+		.tabs-container {
+			justify-content: flex-start;
 		}
 		.tab {
 			padding: 1rem;

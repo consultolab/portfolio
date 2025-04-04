@@ -2,11 +2,14 @@
 export default defineNuxtConfig({
 	compatibilityDate: '2024-11-01',
 	devtools: { enabled: true },
-	modules: ['@nuxt/eslint'],
+	modules: ['@nuxt/eslint', 'vue3-carousel-nuxt'],
+	carousel: {
+    prefix: 'Portfolio'
+  },
 	eslint: {
 		// options here
 	},
-	css: ['./assets/css/main.css', './assets/css/colors.css'],
+	css: ['./assets/css/main.css', './assets/css/colors.css', './assets/css/carousel.css'],
 	app: {
 		pageTransition: { name: 'page', mode: 'out-in' },
 		head: {

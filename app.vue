@@ -1,9 +1,8 @@
 <template>
 	<div class="main-container">
-		<header :class="{ 'header-secondary': route.path.includes('/skills') }">
+		<header>
 			<div class="container">
 				<div id="header" class="header">
-					<img src="./assets/images/default-logo.png" alt="Logo" class="logo" />
 					<nav>
 						<ul class="navbar-menu">
 							<li><NuxtLink to="/work">Work</NuxtLink></li>
