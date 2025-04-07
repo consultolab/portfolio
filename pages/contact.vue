@@ -10,24 +10,40 @@
 				<div class="contact-form">
 					<form @submit.prevent="submitForm">
 						<div class="form-row">
-							<label>Name</label>
-							<input v-model="form.name" type="text" />
+							<label for="name">Name</label>
+							<input id="name" v-model="form.name" type="text" />
+							<p v-if="validationErrors.name" class="error">
+								{{ validationErrors.name }}
+							</p>
 						</div>
 						<div class="form-row">
-							<label>Email</label>
-							<input v-model="form.email" type="text" />
+							<label for="email">Email</label>
+							<input id="email" v-model="form.email" type="text" />
+							<p v-if="validationErrors.email" class="error">
+								{{ validationErrors.email }}
+							</p>
 						</div>
 						<div class="form-row">
-							<label>Message</label>
+							<label for="message">Message</label>
 							<textarea
+								id="message"
 								v-model="form.message"
 								name="message"
 								rows="3"
 							></textarea>
+							<p v-if="validationErrors.message" class="error">
+								{{ validationErrors.message }}
+							</p>
 						</div>
 						<div class="form-row">
-							<button type="submit">Submit</button>
+							<button type="submit" :disabled="loading">Submit</button>
 						</div>
+						<p v-if="successMessage" class="text-green">
+							{{ successMessage }}
+						</p>
+						<p v-if="errorMessage" class="text-red">
+							{{ errorMessage }}
+						</p>
 					</form>
 				</div>
 			</div>
@@ -44,25 +60,70 @@
 		message: '',
 	});
 
+	const validationErrors = ref({
+		name: '',
+		email: '',
+		message: '',
+	});
+
 	const successMessage = ref('');
+	const errorMessage = ref('');
+
 	const loading = ref(false);
 
+	// Simple validation function
+	const validateForm = () => {
+		validationErrors.value = { name: '', email: '', message: '' };
+		let isValid = true;
+
+		if (!form.value.name.trim()) {
+			validationErrors.value.name = 'Name is required';
+			isValid = false;
+		}
+
+		if (!form.value.email.trim()) {
+			validationErrors.value.email = 'Email is required';
+			isValid = false;
+		} else if (!/\S+@\S+\.\S+/.test(form.value.email)) {
+			validationErrors.value.email = 'Invalid email format';
+			isValid = false;
+		}
+
+		if (!form.value.message.trim()) {
+			validationErrors.value.message = 'Message is required';
+			isValid = false;
+		}
+
+		return isValid;
+	};
+
 	const submitForm = async () => {
-		loading.value = true;
 		successMessage.value = '';
+		errorMessage.value = '';
+
+		// Check for errors before submitting
+		if (!validateForm()) {
+			return;
+		}
+
+		loading.value = true;
 
 		try {
 			const data = await $fetch('/api/contact', {
 				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
 				body: form.value,
 			});
-			console.log('data', data);
-			successMessage.value = data;
-		} catch (err) {
-			console.log(err);
+			successMessage.value = data.message;
+			form.value = { name: '', email: '', message: '' };
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		} catch (err: any) {
+			if (err?.data?.message) {
+				errorMessage.value = err.data.message;
+			} else {
+				errorMessage.value = 'Failed to send message. Please try again.';
+			}
 		} finally {
-			console.log('yey');
+			loading.value = false;
 		}
 	};
 </script>
@@ -108,10 +169,63 @@
 		left: 0;
 		color: rgb(var(--secondary));
 	}
+	.contact-form {
+		background: #f9f9f9;
+		padding: 2rem;
+		border-radius: 8px;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		max-width: 500px;
+		margin: auto;
+	}
 	.form-row {
 		display: flex;
 		flex-direction: column;
-		margin-bottom: 2rem;
+		margin-bottom: 1.5rem;
+	}
+	.form-row label {
+		font-weight: bold;
+		margin-bottom: 0.5rem;
+	}
+	.form-row input,
+	.form-row textarea {
+		width: 100%;
+		padding: 0.8rem;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		font-size: 1rem;
+	}
+	.form-row input:focus,
+	.form-row textarea:focus {
+		border-color: #007bff;
+		outline: none;
+	}
+	button {
+		background: #007bff;
+		color: white;
+		padding: 0.8rem 1.5rem;
+		border: none;
+		border-radius: 5px;
+		font-size: 1rem;
+		cursor: pointer;
+		transition: background 0.3s;
+	}
+	button:disabled {
+		background: #ccc;
+		cursor: not-allowed;
+	}
+	button:hover {
+		background: #0056b3;
+	}
+	.text-red {
+		color: rgb(var(--tint-orange));
+	}
+	.text-green {
+		color: rgb(var(--cadmium-green));
+	}
+	.error {
+		color: red;
+		font-size: 0.9rem;
+		margin-top: 0.3rem;
 	}
 
 	@media screen and (max-width: 768px) {
