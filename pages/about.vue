@@ -118,37 +118,6 @@
 		font-size: 1.1rem;
 		line-height: 1.6rem;
 	}
-	.social-media {
-		padding-top: 0.5rem;
-	}
-	.social-media p {
-		font-size: 0.9rem;
-		color: rgb(var(--secondary-text-color));
-		margin-bottom: 0.5rem;
-	}
-	.social-links {
-		display: flex;
-	}
-	.social-links a {
-		margin-right: 0.5rem;
-	}
-	.social-links a img {
-		width: 1.8rem;
-		height: 1.8rem;
-		object-fit: contain;
-	}
-	.social-links a img.default {
-		display: inline-flex;
-	}
-	.social-links a img.active {
-		display: none;
-	}
-	.social-links a:hover img.default {
-		display: none;
-	}
-	.social-links a:hover img.active {
-		display: inline-flex;
-	}
 	.portrait {
 		width: 40%;
 		position: relative;

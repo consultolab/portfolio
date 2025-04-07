@@ -103,7 +103,7 @@
 	}
 
 	.info {
-		padding: 3rem;
+		padding: 3rem 5rem 3rem 3rem;
 		flex-basis: 50%;
 	}
 
@@ -203,7 +203,7 @@
 		}
 		.info {
 			flex-basis: 100%;
-			padding: 3rem 0;
+			padding: 0 0 2rem 0;
 		}
 	}
 </style>

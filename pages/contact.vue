@@ -1,43 +1,83 @@
 <template>
-	<div class="page-content container">
-		<div class="contact-page">
-			<div class="info">
-				<div class="label">Get in touch</div>
-				<div class="title-container">
-					<div class="title-shadow">Contact</div>
-					<div class="title">Contact</div>
+	<div class="contact-container">
+		<div class="page-content container">
+			<div class="contact-page">
+				<div class="info">
+					<div class="label">Get in touch</div>
+					<div class="title-container">
+						<div class="title-shadow">Contact</div>
+						<div class="title">Contact</div>
+					</div>
+					<p>
+						Need a developer to join your stack? Write me a message via the
+						form, or just send me an e-mail directly at
+						<a href="mailto:contact@contact.com">contact@contact.com</a>
+						. I am always up for building cool things.
+					</p>
+					<div class="social-media">
+						<p>or find me on</p>
+						<div class="social-links">
+							<a href="#">
+								<img
+									src="../assets/images/instagram-icon.svg"
+									alt="instagram icon"
+									class="default"
+								/>
+								<img
+									src="../assets/images/instagram-icon-active.svg"
+									alt="instagram icon active"
+									class="active"
+								/>
+							</a>
+							<a href="#">
+								<img
+									src="../assets/images/linkedin-icon.svg"
+									alt="linkedin icon"
+									class="default"
+								/>
+								<img
+									src="../assets/images/linkedin-icon-active.svg"
+									alt="linkedin icon active"
+									class="active"
+								/>
+							</a>
+						</div>
+					</div>
 				</div>
 				<div class="contact-form">
 					<form @submit.prevent="submitForm">
 						<div class="form-row">
-							<label for="name">Name</label>
-							<input id="name" v-model="form.name" type="text" />
-							<p v-if="validationErrors.name" class="error">
-								{{ validationErrors.name }}
-							</p>
+							<div class="form-column">
+								<label for="name">Name</label>
+								<input id="name" v-model="form.name" type="text" />
+								<p v-if="validationErrors.name" class="error">
+									{{ validationErrors.name }}
+								</p>
+							</div>
+							<div class="form-column">
+								<label for="email">Email</label>
+								<input id="email" v-model="form.email" type="text" />
+								<p v-if="validationErrors.email" class="error">
+									{{ validationErrors.email }}
+								</p>
+							</div>
 						</div>
 						<div class="form-row">
-							<label for="email">Email</label>
-							<input id="email" v-model="form.email" type="text" />
-							<p v-if="validationErrors.email" class="error">
-								{{ validationErrors.email }}
-							</p>
+							<div class="form-column message">
+								<textarea
+									id="message"
+									v-model="form.message"
+									name="message"
+									rows="3"
+								></textarea>
+								<p v-if="validationErrors.message" class="error">
+									{{ validationErrors.message }}
+								</p>
+							</div>
 						</div>
-						<div class="form-row">
-							<label for="message">Message</label>
-							<textarea
-								id="message"
-								v-model="form.message"
-								name="message"
-								rows="3"
-							></textarea>
-							<p v-if="validationErrors.message" class="error">
-								{{ validationErrors.message }}
-							</p>
-						</div>
-						<div class="form-row">
-							<button type="submit" :disabled="loading">Submit</button>
-						</div>
+						<button type="submit" :disabled="loading" class="primary-button">
+							Send message
+						</button>
 						<p v-if="successMessage" class="text-green">
 							{{ successMessage }}
 						</p>
@@ -129,14 +169,35 @@
 </script>
 
 <style scoped>
+	.contact-container {
+		display: flex;
+		align-items: center;
+		flex-grow: 1;
+		justify-content: center;
+		width: 100%;
+		z-index: 0;
+		background-color: rgba(var(--primary), 0.05);
+		transition: background 0.2s ease-in-out;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		min-height: calc(100% - 5.4rem);
+		padding-top: 5.4rem; /* this is the header height */
+	}
+	.container {
+		margin: 0 auto;
+		padding-top: 0;
+	}
 	.contact-page {
 		width: 100%;
 		display: flex;
 		flex-direction: row;
-		align-items: center;
 	}
 	.info {
+		display: inline-block;
 		padding: 3rem 5rem;
+		max-width: 40%;
 	}
 	.label {
 		font-size: 0.9rem;
@@ -167,54 +228,129 @@
 		line-height: 5rem;
 		top: 0;
 		left: 0;
-		color: rgb(var(--secondary));
+		color: rgba(var(--primary), 0.05);
+	}
+	.info p {
+		max-width: 26rem;
+	}
+	.info p a {
+		text-decoration: none;
+		color: rgb(var(--tertiary));
+		position: relative;
+		display: inline;
+	}
+	.info p a:after {
+		content: '';
+		width: 0;
+		height: 1px;
+		transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.075);
+		transition-duration: 0.3s;
+		transition-property: all;
+		display: block;
+		position: absolute;
+		bottom: -1px;
+		left: 0;
+		overflow: hidden;
+		background-color: rgb(var(--tertiary));
+	}
+	.info p a:hover::after {
+		width: 100%;
+	}
+	.social-media,
+	.social-media p {
+		margin-top: 0;
 	}
 	.contact-form {
-		background: #f9f9f9;
-		padding: 2rem;
-		border-radius: 8px;
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		max-width: 500px;
+		max-width: 45%;
+		flex-grow: 1;
+		display: flex;
 		margin: auto;
+		background-color: rgb(var(--white));
+		position: relative;
+		z-index: 1;
+	}
+	.contact-form:before {
+		content: '';
+		display: inline-block;
+		position: absolute;
+		right: -2rem;
+		top: -2rem;
+		width: 85%;
+		height: 100%;
+		background-color: rgb(var(--primary));
+	}
+	.contact-form form {
+		width: 100%;
+		background-color: rgb(var(--white));
+		position: relative;
+		padding: 3rem;
 	}
 	.form-row {
 		display: flex;
-		flex-direction: column;
+		gap: 1rem;
 		margin-bottom: 1.5rem;
 	}
-	.form-row label {
-		font-weight: bold;
-		margin-bottom: 0.5rem;
+	.form-row:first-of-type {
+		margin-bottom: 3rem;
 	}
-	.form-row input,
-	.form-row textarea {
+	.form-column label,
+	.form-column.message:before {
+		border-bottom: 1px solid rgb(var(--tint-orange));
+		padding-bottom: 0.4rem;
+	}
+	.form-column {
+		display: flex;
+		flex-grow: 1;
+		align-items: flex-end;
+		position: relative;
+	}
+	.form-column textarea {
+		background-image: linear-gradient(to top, rgb(var(--tint-grey)) 1px, transparent 1px);
+		background-size: 100% 2.4rem;
+		background-attachment: local;
+		background-position: bottom;
+		border: none;
+		height: 7.2rem;
+		line-height: 2.4rem;
+		border-bottom: none;
+		text-indent: 4.5rem;
+		overflow-y: scroll;
+	}
+	.form-column.message:before {
+		content: "Message";
+		display: inline-block;
+		position: absolute;
+		top: -1px;
+		line-height: 2.4rem;
+		padding-bottom: 0;
+	}
+	.form-column input,
+	.form-column textarea {
 		width: 100%;
-		padding: 0.8rem;
-		border: 1px solid #ccc;
-		border-radius: 5px;
-		font-size: 1rem;
+		padding: 0 0.5rem;
+		border: none;
+		font-size: 0.9rem;
+		font-family: "DM Sans", sans-serif;
 	}
-	.form-row input:focus,
-	.form-row textarea:focus {
-		border-color: #007bff;
+	.form-column input {
+		border-bottom: 1px solid rgb(var(--tint-grey));
+		padding: 0.4rem 0.5rem;
+	}
+	.form-column input:focus,
+	.form-column textarea:focus {
+		border-color: rgba(var(--tint-orange), 0.3);
 		outline: none;
 	}
+	.form-column textarea:focus {
+		background-image: linear-gradient(to top, rgba(var(--tint-orange), 0.3) 1px, transparent 1px);
+	}
 	button {
-		background: #007bff;
-		color: white;
-		padding: 0.8rem 1.5rem;
-		border: none;
-		border-radius: 5px;
-		font-size: 1rem;
-		cursor: pointer;
-		transition: background 0.3s;
+		margin: 2rem 0 0 auto;
+		display: block;
 	}
 	button:disabled {
-		background: #ccc;
+		background: rgb(var(--tint-grey));
 		cursor: not-allowed;
-	}
-	button:hover {
-		background: #0056b3;
 	}
 	.text-red {
 		color: rgb(var(--tint-orange));
@@ -226,22 +362,48 @@
 		color: red;
 		font-size: 0.9rem;
 		margin-top: 0.3rem;
+		position: absolute;
+		top: 100%;
 	}
 
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 767px) {
 		.contact-page {
-			flex-direction: column-reverse;
+			flex-direction: column;
 		}
 		.title-shadow {
 			font-size: 4rem;
 		}
 		.info {
 			width: 100%;
-			padding: 6rem 1rem 2rem 1rem;
+			max-width: 100%;
+			padding: 0;
+		}
+		.info p {
+			max-width: 100%;
+		}
+		.contact-form {
+			max-width: 100%;
+			margin: 3rem 0 2rem 0;
+		}
+		.contact-form:before {
+			top: -1rem;
+			right: -1rem;
+		}
+		.contact-form form {
+			padding: 1.5rem;
+		}
+	}
+	@media screen and (max-width: 1024px) {
+		.form-row {
+			flex-direction: column;
+			gap: 2rem;
+		}
+		.form-row:first-of-type {
+			margin-bottom: 2rem;
 		}
 	}
 
-	@media screen and (min-width: 769px) and (max-width: 1024px) {
+	@media screen and (min-width: 768px) and (max-width: 1024px) {
 		.info {
 			padding: 2rem;
 		}
