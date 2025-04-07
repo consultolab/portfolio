@@ -315,6 +315,8 @@
 		border-bottom: none;
 		text-indent: 4.5rem;
 		overflow-y: scroll;
+		-ms-overflow-style: none;
+		scrollbar-width: none;
 	}
 	.form-column.message:before {
 		content: "Message";
@@ -343,6 +345,9 @@
 	}
 	.form-column textarea:focus {
 		background-image: linear-gradient(to top, rgba(var(--tint-orange), 0.3) 1px, transparent 1px);
+	}
+	.form-column textarea::-webkit-scrollbar {
+		display: none;
 	}
 	button {
 		margin: 2rem 0 0 auto;
