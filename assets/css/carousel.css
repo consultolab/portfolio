@@ -1,0 +1,24 @@
+.carousel__prev,
+.carousel__next{
+	position: absolute;
+	top: -5rem;
+	background-color: rgba(var(--tertiary), 0.7);
+	border-radius: 50%;
+	width: 2.5rem;
+	height: 2.5rem;
+}
+.carousel__prev {
+	left: auto;
+	right: 3.5rem;
+}
+.carousel__next {
+	left: auto;
+	right: 0;
+}
+.carousel__icon {
+	fill: rgb(var(--white));
+}
+.carousel__prev:hover, .carousel__next:hover,
+.carousel__prev:focus, .carousel__next:focus {
+	background-color: rgba(var(--tertiary), 0.9);
+}
