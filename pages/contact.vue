@@ -305,7 +305,11 @@
 		position: relative;
 	}
 	.form-column textarea {
-		background-image: linear-gradient(to top, rgb(var(--tint-grey)) 1px, transparent 1px);
+		background-image: linear-gradient(
+			to top,
+			rgb(var(--tint-grey)) 1px,
+			transparent 1px
+		);
 		background-size: 100% 2.4rem;
 		background-attachment: local;
 		background-position: bottom;
@@ -319,7 +323,7 @@
 		scrollbar-width: none;
 	}
 	.form-column.message:before {
-		content: "Message";
+		content: 'Message';
 		display: inline-block;
 		position: absolute;
 		top: -1px;
@@ -332,7 +336,7 @@
 		padding: 0 0.5rem;
 		border: none;
 		font-size: 0.9rem;
-		font-family: "DM Sans", sans-serif;
+		font-family: 'DM Sans', sans-serif;
 	}
 	.form-column input {
 		border-bottom: 1px solid rgb(var(--tint-grey));
@@ -344,7 +348,11 @@
 		outline: none;
 	}
 	.form-column textarea:focus {
-		background-image: linear-gradient(to top, rgba(var(--tint-orange), 0.3) 1px, transparent 1px);
+		background-image: linear-gradient(
+			to top,
+			rgba(var(--tint-orange), 0.3) 1px,
+			transparent 1px
+		);
 	}
 	.form-column textarea::-webkit-scrollbar {
 		display: none;
