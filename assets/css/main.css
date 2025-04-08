@@ -141,7 +141,7 @@ body {
 }
 .label {
 	font-size: 0.9rem;
-	font-weight: 600;
+	font-weight: 700;
 	text-transform: uppercase;
 	color: rgb(var(--tint-orange));
 	margin-bottom: 1rem;

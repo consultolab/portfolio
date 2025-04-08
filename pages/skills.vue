@@ -10,7 +10,7 @@
 					:class="{ active: activeIndex === index }"
 					@click="setActive(index, $event)"
 				>
-					<img :src="`./images/` + item.image" />
+					<img :src="`/images/` + item.image" :alt="item.image" />
 				</div>
 				<div class="active-border"></div>
 			</div>
