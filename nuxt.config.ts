@@ -24,6 +24,7 @@ export default defineNuxtConfig({
 		'./assets/css/carousel.css',
 	],
 	app: {
+		baseURL: '/',
 		pageTransition: { name: 'page', mode: 'out-in' },
 		head: {
 			link: [
