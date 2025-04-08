@@ -23,6 +23,10 @@ jobs:
            echo "SMTP_USER=${{ secrets.SMTP_USER }}" >> .env
            echo "SMTP_PASSWORD=${{ secrets.SMTP_PASSWORD }}" >> .env
            echo "SMTP_EMAIL=${{ secrets.SMTP_EMAIL }}" >> .env
+      - name: List files in working director
+        run: ls -alh
+      - name: Show contents of .env file
+        run: cat .env
       - run: npx nuxt build --preset github_pages
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
