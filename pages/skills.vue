@@ -17,7 +17,7 @@
 			<div class="tab-content">
 				<transition name="fade" mode="out-in">
 					<div :key="activeIndex" class="content-box">
-						<div class="subtitle">Info</div>
+						<div class="label">Info</div>
 						<div class="title-container">
 							<div class="title-shadow">{{ data[activeIndex].title }}</div>
 							<div class="title">{{ data[activeIndex].title }}</div>
@@ -30,10 +30,11 @@
 								{{ infoRow }}
 							</p>
 						</div>
-						<NuxtLink to="/work" class="primary-button">
-							See related work
-						</NuxtLink>
-						<div class="carousel-wrapper" :class="{ 'disable-animation': !animateKeywords }">
+						<NuxtLink to="/" class="primary-button">See related work</NuxtLink>
+						<div
+							class="carousel-wrapper"
+							:class="{ 'disable-animation': !animateKeywords }"
+						>
 							<div class="carousel">
 								<div class="carousel-content">
 									<span
@@ -54,12 +55,23 @@
 </template>
 
 <script setup>
-	import { computed, nextTick, onMounted } from 'vue';
+	import { nextTick, onMounted } from 'vue';
+
+	useHead({
+		title: 'Skills | Portfolio',
+		meta: [
+			{
+				name: 'description',
+				content:
+					'Learn more about my skillds and the technologies I work with.',
+			},
+		],
+	});
 
 	const activeIndex = ref(0);
 	const activeTop = ref(0);
 	const items = ref([]);
-	const animateKeywords = true;
+	const animateKeywords = false;
 
 	const keywords = [
 		'web-design',
@@ -70,12 +82,6 @@
 		'adaptability',
 		'team work',
 	];
-
-	// const repeatedKeywords = computed(() => [
-	// 	...keywords,
-	// 	...keywords,
-	// 	...keywords,
-	// ]);
 
 	const data = [
 		{
@@ -226,39 +232,8 @@
 		font-size: 1.1rem;
 		line-height: 1.6rem;
 	}
-
-	.subtitle {
-		font-size: 0.9rem;
-		font-weight: 600;
-		text-transform: uppercase;
-		color: rgb(var(--tint-orange));
-		margin-bottom: 1rem;
-	}
-
-	.title-container {
-		display: flex;
-		position: relative;
-		align-items: center;
-	}
-	.title {
-		font-size: 2.5rem;
-		font-weight: 700;
-		line-height: 5rem;
-		position: relative;
-		display: block;
-		z-index: 1;
-		color: rgb(var(--primary));
-	}
 	.title-shadow {
-		font-size: 5rem;
-		font-weight: 700;
-		position: absolute;
-		z-index: 0;
-		line-height: 5rem;
-		top: 0;
-		left: 0;
 		color: rgba(var(--tint-salmon), 0.15);
-		min-width: 30rem;
 	}
 
 	.primary-button {
@@ -321,24 +296,6 @@
 		to {
 			transform: translateX(-50%);
 		}
-	}
-
-	/* Swipe-Up Transition */
-	.swipe-up-enter-active,
-	.swipe-up-leave-active {
-		transition:
-			transform 0.5s ease-in-out,
-			opacity 0.3s ease-in-out;
-	}
-
-	.swipe-up-enter {
-		transform: translateY(100%);
-		opacity: 1;
-	}
-
-	.swipe-up-leave-to {
-		transform: translateY(-100%);
-		opacity: 0;
 	}
 
 	/* Fade-In Transition */

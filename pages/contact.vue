@@ -49,7 +49,12 @@
 						<div class="form-row">
 							<div class="form-column">
 								<label for="name">Name</label>
-								<input id="name" v-model="form.name" type="text" />
+								<input
+									id="name"
+									v-model="form.name"
+									type="text"
+									ref="inputName"
+								/>
 								<p v-if="validationErrors.name" class="error">
 									{{ validationErrors.name }}
 								</p>
@@ -68,7 +73,7 @@
 									id="message"
 									v-model="form.message"
 									name="message"
-									rows="3"
+									rows="6"
 								></textarea>
 								<p v-if="validationErrors.message" class="error">
 									{{ validationErrors.message }}
@@ -92,7 +97,18 @@
 </template>
 
 <script setup lang="ts">
-	import { ref } from 'vue';
+	import { onMounted, ref } from 'vue';
+
+	useHead({
+		title: 'Contact | Portfolio',
+		meta: [
+			{
+				name: 'description',
+				content:
+					'You can contact me either by e-mail or using the contact form.',
+			},
+		],
+	});
 
 	const form = ref({
 		name: '',
@@ -110,6 +126,12 @@
 	const errorMessage = ref('');
 
 	const loading = ref(false);
+
+	const inputName = ref(null);
+
+	onMounted(() => {
+		inputName.value?.focus();
+	});
 
 	// Simple validation function
 	const validateForm = () => {
@@ -199,35 +221,7 @@
 		padding: 3rem 5rem;
 		max-width: 40%;
 	}
-	.label {
-		font-size: 0.9rem;
-		font-weight: 600;
-		text-transform: uppercase;
-		color: rgb(var(--tint-orange));
-		margin-bottom: 1rem;
-	}
-	.title-container {
-		display: flex;
-		position: relative;
-		align-items: center;
-	}
-	.title {
-		font-size: 2.5rem;
-		font-weight: 700;
-		line-height: 5rem;
-		position: relative;
-		display: block;
-		z-index: 1;
-		color: rgb(var(--primary));
-	}
 	.title-shadow {
-		font-size: 5rem;
-		font-weight: 700;
-		position: absolute;
-		z-index: 0;
-		line-height: 5rem;
-		top: 0;
-		left: 0;
 		color: rgba(var(--primary), 0.05);
 	}
 	.info p {
@@ -304,6 +298,9 @@
 		align-items: flex-end;
 		position: relative;
 	}
+	.form-column label {
+		font-size: 0.9rem;
+	}
 	.form-column textarea {
 		background-image: linear-gradient(
 			to top,
@@ -314,8 +311,9 @@
 		background-attachment: local;
 		background-position: bottom;
 		border: none;
-		height: 7.2rem;
+		height: 14.4rem;
 		line-height: 2.4rem;
+		resize: none;
 		border-bottom: none;
 		text-indent: 4.5rem;
 		overflow-y: scroll;
@@ -329,6 +327,7 @@
 		top: -1px;
 		line-height: 2.4rem;
 		padding-bottom: 0;
+		font-size: 0.9rem;
 	}
 	.form-column input,
 	.form-column textarea {
@@ -382,9 +381,7 @@
 	@media screen and (max-width: 767px) {
 		.contact-page {
 			flex-direction: column;
-		}
-		.title-shadow {
-			font-size: 4rem;
+			padding-top: 2rem;
 		}
 		.info {
 			width: 100%;
@@ -419,9 +416,6 @@
 	@media screen and (min-width: 768px) and (max-width: 1024px) {
 		.info {
 			padding: 2rem;
-		}
-		.title-shadow {
-			min-width: 30rem;
 		}
 	}
 

@@ -5,7 +5,7 @@
 				<div id="header" class="header">
 					<nav>
 						<ul class="navbar-menu">
-							<li><NuxtLink to="/work">Work</NuxtLink></li>
+							<li><NuxtLink to="/">Work</NuxtLink></li>
 							<li><NuxtLink to="/about">About me</NuxtLink></li>
 							<li><NuxtLink to="/skills">Skills</NuxtLink></li>
 							<li><NuxtLink to="/contact">Contact</NuxtLink></li>
@@ -53,5 +53,11 @@
 		animation: 0.4s linear;
 		background-color: rgb(var(--tertiary));
 		transform: translateX(-50%) translateY(-50%) translateZ(0px);
+	}
+	@media screen and (max-width: 1024px) {
+		.circle,
+		.circle-dot {
+			display: none;
+		}
 	}
 </style>

@@ -69,6 +69,19 @@
 	</div>
 </template>
 
+<script setup>
+	useHead({
+		title: 'About me | Portfolio',
+		meta: [
+			{
+				name: 'description',
+				content:
+					'See more about me, my background in frontend or full-stack development, and the technologies I work with.',
+			},
+		],
+	});
+</script>
+
 <style scoped>
 	.about-page {
 		width: 100%;
@@ -79,37 +92,6 @@
 	.info {
 		padding: 3rem 5rem;
 		width: 45%;
-	}
-	.label {
-		font-size: 0.9rem;
-		font-weight: 600;
-		text-transform: uppercase;
-		color: rgb(var(--tint-orange));
-		margin-bottom: 1rem;
-	}
-	.title-container {
-		display: flex;
-		position: relative;
-		align-items: center;
-	}
-	.title {
-		font-size: 2.5rem;
-		font-weight: 700;
-		line-height: 5rem;
-		position: relative;
-		display: block;
-		z-index: 1;
-		color: rgb(var(--primary));
-	}
-	.title-shadow {
-		font-size: 5rem;
-		font-weight: 700;
-		position: absolute;
-		z-index: 0;
-		line-height: 5rem;
-		top: 0;
-		left: 0;
-		color: rgb(var(--secondary));
 	}
 	.description {
 		margin-bottom: 3rem;
@@ -151,9 +133,6 @@
 		.about-page {
 			flex-direction: column-reverse;
 		}
-		.title-shadow {
-			font-size: 4rem;
-		}
 		.info,
 		.portrait {
 			width: 100%;
@@ -176,9 +155,6 @@
 	@media screen and (min-width: 769px) and (max-width: 1024px) {
 		.info {
 			padding: 2rem;
-		}
-		.title-shadow {
-			min-width: 30rem;
 		}
 	}
 
