@@ -21,7 +21,7 @@
 							@click="setActive(index, $event)"
 						>
 							<div class="item">
-								<img :src="`/images/` + item.image" alt="item.image" />
+								<img :src="`/images/` + item.image" :alt="item.image" />
 								<h3>{{ item.title }}</h3>
 								<p class="type">{{ item.type }}</p>
 							</div>
