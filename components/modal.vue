@@ -54,7 +54,6 @@
 </template>
 
 <script setup>
-	import { defineEmits, defineProps } from 'vue';
 	const props = defineProps({
 		isOpen: Boolean,
 		project: Object,
