@@ -139,6 +139,38 @@ body {
 .social-links a:hover img.active {
 	display: inline-flex;
 }
+.label {
+	font-size: 0.9rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: rgb(var(--tint-orange));
+	margin-bottom: 1rem;
+}
+.title-container {
+	display: flex;
+	position: relative;
+	align-items: center;
+}
+.title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	line-height: 5rem;
+	position: relative;
+	display: block;
+	z-index: 1;
+	color: rgb(var(--primary));
+}
+.title-shadow {
+	font-size: 5rem;
+	font-weight: 700;
+	position: absolute;
+	z-index: 0;
+	line-height: 5rem;
+	top: 0;
+	left: 0;
+	color: rgb(var(--secondary));
+	min-width: 30rem;
+}
 
 @media screen and (max-width: 768px) {
 	.header {
@@ -153,6 +185,14 @@ body {
 	}
 	.navbar-menu li:first-of-type a:after {
 		display: none;
+	}
+	.title-shadow {
+		font-size: 4rem;
+	}
+}
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+	.title-shadow {
+		min-width: 30rem;
 	}
 }
 
