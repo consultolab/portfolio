@@ -41,7 +41,7 @@
 								{{ infoRow }}
 							</p>
 						</div>
-						<NuxtLink to="/work" class="primary-button">
+						<NuxtLink to="/" class="primary-button" @click="closeModal">
 							See other projects
 						</NuxtLink>
 					</div>
