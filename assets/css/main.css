@@ -188,14 +188,9 @@ body {
 	}
 	.title-shadow {
 		font-size: 4rem;
+		min-width: 20rem;
 	}
 }
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-	.title-shadow {
-		min-width: 30rem;
-	}
-}
-
 
 @media screen and (max-width: 1024px) {
 	.container {

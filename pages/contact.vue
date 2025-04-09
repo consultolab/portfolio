@@ -304,6 +304,7 @@
 	}
 	.form-column label.hide {
 		opacity: 0;
+		width: 0;
 	}
 	.form-column textarea {
 		background-image: linear-gradient(
