@@ -20,11 +20,8 @@
 	useHead({
 		title: 'Page not found | Portfolio',
 		meta: [
-			{
-				name: 'description',
-				content: 'The page you are looking for does not exist.',
-			},
-		],
+	   { name: 'robots', content: 'noindex, nofollow' }
+	 ]
 	});
 </script>
 
@@ -85,7 +82,7 @@
 			font-size: 6rem;
 			line-height: 6rem;
 		}
-		h1{
+		h1 {
 			margin-top: 1rem;
 		}
 	}
