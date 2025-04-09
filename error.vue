@@ -19,9 +19,6 @@
 <script setup>
 	useHead({
 		title: 'Page not found | Portfolio',
-		meta: [
-	   { name: 'robots', content: 'noindex, nofollow' }
-	 ]
 	});
 </script>
 
