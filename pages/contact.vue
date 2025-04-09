@@ -69,6 +69,7 @@
 						</div>
 						<div class="form-row">
 							<div class="form-column message">
+								<label for="message" class="hide">Name</label>
 								<textarea
 									id="message"
 									v-model="form.message"
@@ -300,6 +301,9 @@
 	}
 	.form-column label {
 		font-size: 0.9rem;
+	}
+	.form-column label.hide {
+		display: none;
 	}
 	.form-column textarea {
 		background-image: linear-gradient(
