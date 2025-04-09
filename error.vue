@@ -19,6 +19,13 @@
 <script setup>
 	useHead({
 		title: 'Page not found | Portfolio',
+		meta: [
+			{
+				name: 'description',
+				content:
+					'The page you are looking for does not exist.',
+			},
+		],
 	});
 </script>
 
