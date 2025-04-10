@@ -14,13 +14,20 @@ export default defineNuxtConfig({
 		'./assets/css/colors.css',
 		'./assets/css/carousel.css',
 	],
+	runtimeConfig: {
+		public: {
+			emailjsServiceId: process.env.NUXT_PUBLIC_EMAILJS_SERVICE_ID,
+			emailjsTemplateId: process.env.NUXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+			emailjsPublicKey: process.env.NUXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+		},
+	},
 	app: {
 		baseURL: '/',
 		pageTransition: { name: 'page', mode: 'out-in' },
 		head: {
 			htmlAttrs: {
-        lang: 'en',
-      },
+				lang: 'en',
+			},
 			link: [
 				{
 					rel: 'preconnect',

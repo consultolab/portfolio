@@ -51,9 +51,9 @@
 								<label for="name">Name</label>
 								<input
 									id="name"
+									ref="inputName"
 									v-model="form.name"
 									type="text"
-									ref="inputName"
 								/>
 								<p v-if="validationErrors.name" class="error">
 									{{ validationErrors.name }}
@@ -98,7 +98,12 @@
 </template>
 
 <script setup lang="ts">
+	import { useRuntimeConfig } from '#imports';
+	import emailjs from 'emailjs-com';
 	import { onMounted, ref } from 'vue';
+
+	// Access runtime config
+	const config = useRuntimeConfig();
 
 	useHead({
 		title: 'Contact | Portfolio',
@@ -171,23 +176,21 @@
 
 		loading.value = true;
 
-		try {
-			const data = await $fetch('/api/contact', {
-				method: 'POST',
-				body: form.value,
-			});
-			successMessage.value = data.message;
-			form.value = { name: '', email: '', message: '' };
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		} catch (err: any) {
-			if (err?.data?.message) {
-				errorMessage.value = err.data.message;
-			} else {
+		emailjs
+			.send(
+				config.public.emailjsServiceId,
+				config.public.emailjsTemplateId,
+				form.value,
+				config.public.emailjsPublicKey
+			)
+			.then(() => {
+				loading.value = false;
+				successMessage.value = 'Your message has been sent successfully!';
+			})
+			.catch(() => {
+				loading.value = false;
 				errorMessage.value = 'Failed to send message. Please try again.';
-			}
-		} finally {
-			loading.value = false;
-		}
+			});
 	};
 </script>
 
